@@ -10,6 +10,9 @@ SOURCES += \
         responspc.cpp
 
 HEADERS += \
+    GestionnaireProduction.h \
+    GestionnaireProduction.h \
+    GestionnaireProduction.h \
     coordonnees.h \
     pc.h \
     producteur.h \
