@@ -22,7 +22,7 @@ class Coordonnees
     /// @brief Le numéro de téléphone de la personne est une chaîne de caractères C++.
     int NumTelephone;
 
-protected:
+public:
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
   ///
@@ -39,7 +39,6 @@ protected:
   Coordonnees(std::string ml, std::string ad, int cd, std::string vl, int nt) :
       Mail(ml), Adresse(ad), CodePostal(cd), Ville(vl), NumTelephone(nt) {}
 
-public:
     ///@brief Le destructeur ne fait rien.
   virtual ~Coordonnees() {}
 
@@ -78,6 +77,37 @@ public:
   ///
   /// @see     NumTelephone.
   virtual int numtel() const   { return NumTelephone; }
+
+
+
+  void   decrit(std::ostream &os) const
+    { os << "\t" << mail() << "\n\t" << adresse() <<  "\n\t" << codePostal()
+         <<  "\n\t" << ville() <<  "\n\t" << numtel(); }
+
+    /// @brief Cette méthode retourne la description (nom et prix)
+    ///        de la pizza.
+    ///
+    /// @return  la description (nom et prix) de la pizza  (dans une chaîne
+    ///           de caractères C++).
+    ///
+    /// @see  decrit(std::ostream &) const, std::ostringstream,
+    ///       std::ostringstream.str().
+    std::string decrit() const
+    { std::ostringstream os;  decrit(os);  return os.str(); }
+
+    /// @brief Cette méthode permet d'affiche la description (nom et prix)
+    ///        de la pizza, suivie d'un passage à la ligne, dans un flot
+    ///        de sortie donné en paramètre.
+    ///
+    /// @param  os  le flot de sortie dans lequel la description
+    ///             sera affichée.
+    ///
+    /// @see  decrit(std::ostream &) const, std::ostream::operator<<(),
+    ///       std::endl.
+  void afficher(std::ostream &os) const {
+      decrit(os); os << std::endl;
+
+  }
 
 };
 

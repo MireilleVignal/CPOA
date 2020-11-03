@@ -6,7 +6,6 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         pc.cpp \
-        producteur.cpp \
         responspc.cpp
 
 HEADERS += \
@@ -15,5 +14,4 @@ HEADERS += \
     GestionnaireProduction.h \
     coordonnees.h \
     pc.h \
-    producteur.h \
     responspc.h

@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "producteur.h"
+
 using namespace std;
 
 
@@ -11,6 +13,10 @@ using namespace std;
 /// @version 1a
 int main(int argc, char *argv[])
 {
-    cout << "Hello World!" << endl;
+    Coordonnees c("patrick.durant@gmail.fr","4 route du sud", 54500, "Vandoeuvre les nancy", 0125364757);
+    Producteur prod("Durant", "Patrick", c);
+
+    prod.affiche(std::cout);
+
     return 0;
 }

@@ -12,7 +12,7 @@ class Producteur
     // @brief Les coordonnées du producteur sont des Coordonnees
     Coordonnees Coord;
 
-protected:
+public:
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
   ///
@@ -23,7 +23,6 @@ protected:
   /// @see     Nom, Prenom, Coord.
   Producteur(std::string nom, std::string prenom, Coordonnees c) : Nom(nom), Prenom(prenom), Coord(c){}
 
-public:
   /// @brief Le destructeur ne fait rien.
   virtual ~Producteur(){}
 
@@ -47,6 +46,32 @@ public:
     ///
     /// @see     Coord.
     virtual Coordonnees coordon() const   { return Coord; }
+
+  void   decrit(std::ostream &os) const
+    { os << nom() << " " << prenom() << "\n" << coordon().decrit(); }
+
+    /// @brief Cette méthode retourne la description (nom et prix)
+    ///        de la pizza.
+    ///
+    /// @return  la description (nom et prix) de la pizza  (dans une chaîne
+    ///           de caractères C++).
+    ///
+    /// @see  decrit(std::ostream &) const, std::ostringstream,
+    ///       std::ostringstream.str().
+    std::string decrit() const
+    { std::ostringstream os;  decrit(os);  return os.str(); }
+
+    /// @brief Cette méthode permet d'affiche la description (nom et prix)
+    ///        de la pizza, suivie d'un passage à la ligne, dans un flot
+    ///        de sortie donné en paramètre.
+    ///
+    /// @param  os  le flot de sortie dans lequel la description
+    ///             sera affichée.
+    ///
+    /// @see  decrit(std::ostream &) const, std::ostream::operator<<(),
+    ///       std::endl.
+    void  affiche(std::ostream &os) const
+    { decrit(os); os << std::endl; }
 };
 
 #endif // PRODUCTEUR_H
