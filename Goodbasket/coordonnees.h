@@ -19,8 +19,10 @@ class Coordonnees
     int CodePostal;
     /// @brief Le nom de la ville de la personne est une chaîne de caractères C++.
     std::string Ville;
-    /// @brief Le numéro de téléphone de la personne est une chaîne de caractères C++.
-    int NumTelephone;
+    /// @brief Le numéro de téléphone de la personne est un unsigned int.
+    unsigned int NumTelephone;
+    /// @brief Le Mot de passe de la personne est une chaîne de caractères C++.
+    std::string MotDePasse;
 
 public:
   /// @brief Le constructeur permet de remplir les champs
@@ -34,10 +36,13 @@ public:
   /// @param cd le code postal de la personne
   /// @param vl la ville de la personne
   /// @param nt le numéro de téléphone de la personne
+  /// @param mdp le mot de passe de la personne.
   ///
-  /// @see     Mail, Adresse, CodePostal, Ville, NumTelephone.
-  Coordonnees(std::string ml, std::string ad, int cd, std::string vl, int nt) :
-      Mail(ml), Adresse(ad), CodePostal(cd), Ville(vl), NumTelephone(nt) {}
+  /// @see     Mail, Adresse, CodePostal, Ville, NumTelephone, MotDePasse.
+  Coordonnees(std::string ml, std::string ad, int cd, std::string vl, unsigned int nt, std::string mdp) :
+      Mail(ml), Adresse(ad), CodePostal(cd), Ville(vl), NumTelephone(nt), MotDePasse(mdp) {
+      //verifAdresse();
+  }
 
     ///@brief Le destructeur ne fait rien.
   virtual ~Coordonnees() {}
@@ -76,7 +81,29 @@ public:
   /// @return  le numéro de téléphone de la personne (dans un entier).
   ///
   /// @see     NumTelephone.
-  virtual int numtel() const   { return NumTelephone; }
+  virtual unsigned int numtel() const   { return NumTelephone; }
+  /// @brief   Cette méthode donne le mot de passe de la personne.
+  ///
+  /// @return  le mot de passe de la personne (dans une chaîne de caractères C++).
+  ///
+  /// @see     MotDePasse.
+  virtual std::string motdepas() const   { return MotDePasse; }
+
+
+
+  /// @brief Cette méthode vérifie si les coordonées données sont valides ou non
+  ///
+  /// Ce constructeur est protégé pour que la classe Coordonnees
+  /// reste abstraite
+  ///
+  ///
+  /// @see
+  bool verifAdresse(){
+    if((codePostal()>=01000 && codePostal()< 96000 ) || (codePostal() >= 971000 && codePostal() < 975000)){
+        return false;
+    }
+    return false;
+  }
 
 
 
@@ -84,10 +111,9 @@ public:
     { os << "\t" << mail() << "\n\t" << adresse() <<  "\n\t" << codePostal()
          <<  "\n\t" << ville() <<  "\n\t" << numtel(); }
 
-    /// @brief Cette méthode retourne la description (nom et prix)
-    ///        de la pizza.
+    /// @brief Cette méthode retourne les coordonnées de la personne
     ///
-    /// @return  la description (nom et prix) de la pizza  (dans une chaîne
+    /// @return  les coordonnées de la personne (dans une chaîne
     ///           de caractères C++).
     ///
     /// @see  decrit(std::ostream &) const, std::ostringstream,
@@ -95,9 +121,8 @@ public:
     std::string decrit() const
     { std::ostringstream os;  decrit(os);  return os.str(); }
 
-    /// @brief Cette méthode permet d'affiche la description (nom et prix)
-    ///        de la pizza, suivie d'un passage à la ligne, dans un flot
-    ///        de sortie donné en paramètre.
+    /// @brief Cette méthode permet d'affiche les coordonnées de la personne
+    ///         avec un espacement
     ///
     /// @param  os  le flot de sortie dans lequel la description
     ///             sera affichée.

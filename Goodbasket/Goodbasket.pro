@@ -5,10 +5,10 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        pc.cpp \
-        responspc.cpp
+        pc.cpp
 
 HEADERS += \
+    GestionnaireConnexion.h \
     GestionnaireProduction.h \
     GestionnaireProduction.h \
     GestionnaireProduction.h \
