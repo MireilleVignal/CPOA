@@ -12,6 +12,7 @@ HEADERS += \
     GestionnaireProduction.h \
     GestionnaireProduction.h \
     GestionnaireProduction.h \
+    Personne.h \
     coordonnees.h \
     pc.h \
     responspc.h

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "producteur.h"
+#include "Personne.h"
 
 using namespace std;
 
@@ -15,9 +15,9 @@ int main()
 {
     //le numéro de téléphone ne peut pas commencer par un 0 ATTENTION
     Coordonnees c("patrick.durant@gmail.fr","4 route du sud", 54500, "Vandoeuvre les nancy", 625143625, "codeXY");
-    Producteur prod("Durant", "Patrick", c);
+    Personne pers("Durant", "Patrick", c,'P');
 
-    prod.affiche(std::cout);
+    pers.affiche(std::cout);
 
     //Demander la consultation des produits, la connexion ou l'inscription
     int choix;
