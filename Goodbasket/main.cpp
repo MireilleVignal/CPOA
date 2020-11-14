@@ -19,6 +19,24 @@ int main()
 
     pers.affiche(std::cout);
 
+    //Prod /Cons /ResponsPc
+    /*char perso;
+    cout << "Etes-vous un producteur, un consommateur ou un Responsable ? (p,c,r)\n ";
+    cin >> perso;
+
+    if(perso == 'p' || perso == 'P'){
+        cout << "Bonjour et bienvenu Monsieur le producteur" << endl;
+    }
+    else if (perso == 'c' || perso == 'C') {
+        cout << "Vous pouvez vous connecter : " << endl;
+    }
+    else if (perso == 'R' || perso == 'R') {
+        cout << "Veuillez saisir les informations suivantes pour vous inscrir" << endl;
+    }
+    else {
+        cout << "Vous avez fait un movais choix" << endl;
+    }*/
+
     //Demander la consultation des produits, la connexion ou l'inscription
     int choix;
     cout << "Que voulez vous faire ? 1: Consulter, 2:Connexion, 3: Inscription ";

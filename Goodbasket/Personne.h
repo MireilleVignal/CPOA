@@ -2,6 +2,7 @@
 #define PERSONNE_H
 
 #include "coordonnees.h"
+#include "GestionnaireProduction.h"
 
 class Personne
 {
@@ -13,6 +14,9 @@ class Personne
     Coordonnees Coord;
     // @brief Le statut de la personne est un caractères C++.
     char Statut;
+
+    //@brief Le gestionnaire de produit.
+    GestionnaireProduction GestProduit;
 
 public:
   /// @brief Le constructeur permet de remplir les champs
@@ -28,6 +32,8 @@ public:
 
   /// @brief Le destructeur ne fait rien.
   virtual ~Personne(){}
+
+
 
     /// @brief   Cette méthode donne le nom du producteur.
     ///
@@ -56,20 +62,13 @@ public:
     ///
     /// @see     Prenom.
     virtual std::string statut() const   {
-      if(Statut == 'P' || Statut == 'p')
-          return "Producteur";
-      else if (Statut == 'C' ||  Statut == 'c')
-          return "Consommateur";
-      else if (Statut == 'R' ||  Statut == 'r')
-          return "Responsable";
-      return "Mais qui êtes-vous ?";
+      return verifPersonne(Statut);
     }
 
   void   decrit(std::ostream &os) const
     { os << nom() << " " << prenom() << "\n" << coordon().decrit() << "\n" << statut(); }
 
-    /// @brief Cette méthode retourne la description (nom et prix)
-    ///        de la pizza.
+    /// @brief Cette méthode retourne la description de la personne
     ///
     /// @return  la description (nom et prix) de la pizza  (dans une chaîne
     ///           de caractères C++).
@@ -79,9 +78,7 @@ public:
     std::string decrit() const
     { std::ostringstream os;  decrit(os);  return os.str(); }
 
-    /// @brief Cette méthode permet d'affiche la description (nom et prix)
-    ///        de la pizza, suivie d'un passage à la ligne, dans un flot
-    ///        de sortie donné en paramètre.
+    /// @brief Cette méthode permet d'affiche la description de la personne
     ///
     /// @param  os  le flot de sortie dans lequel la description
     ///             sera affichée.
@@ -90,6 +87,40 @@ public:
     ///       std::endl.
     void  affiche(std::ostream &os) const
     { decrit(os); os << std::endl; }
+
+
+    //------------------------------------------------------------------------------------------------------------------------
+
+    /// @brief Cette méthode retourne le statut de la personne
+    ///
+    /// @param c le statut de la personne (correct ou non).
+    ///
+    /// @return  la statut de la personne.
+     std::string verifPersonne(char c) const{
+        if(c == 'P' || c == 'p')
+            return "Producteur";
+        else if (c == 'C' ||  c == 'c')
+            return "Consommateur";
+        else if (c == 'R' ||  c == 'r')
+            return "Responsable";
+        return "Mais qui êtes-vous ?";
+    }
+
+     /// @brief Cette méthode permet au producteur de proposer des
+     ///        produits (vérifié si ok en même temps)
+     ///
+     /// @param n le nom du produit,
+     /// @param q la quantité du produit,
+     /// @param p le prix du produit.
+     ///
+     void proposerProduit(std::string n, int q, float p){
+         if(verifPersonne(Statut) == "Producteur"){
+            GestProduit.ajouterProduits(Produit(n,q,p));
+         }
+     }
+
 };
+
+
 
 #endif // PERSONNE_H

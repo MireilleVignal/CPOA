@@ -27,7 +27,7 @@ class Produit{
     /// @brief Le prix est un réel en virgule flottante.
     float Prix;
 
-protected:
+public:
     /// @brief Le constructeur permet de remplir les champs
     ///        de la classe en fonction des paramètres passés.
     ///
@@ -80,7 +80,7 @@ class GestionnaireProduction
     /// @brief Le produits ddu gestionnaire est un tableau de produit C++.
     std::vector<Produit> lesProduits;
 
-protected:
+public :
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
   ///
@@ -96,14 +96,15 @@ protected:
   /// @see     Mail, Adresse, CodePostal, Ville, NumTelephone.
   GestionnaireProduction();
 
-public :
+
 
     /// @brief Cette méthode permet d'ajouter un produit a la liste
     ///
     /// @see   lesProduits.
     virtual void ajouterProduits(Produit p) {
-        if (verifierQP(p.quantite(),p.prix()))
+        if (verifierQP(p.quantite(),p.prix()) && verifierProduits(p.nom()))
             lesProduits.push_back(p);
+        //mettre un message d'erreur sinon
     }
 
     /// @brief Cette méthode permet de verifier que la quantite et les prix sont valides
@@ -114,9 +115,19 @@ public :
     bool verifierQP(int quantite, float prix){
         if(quantite > 0 && prix > 0)
             return true;
+        //afficher un message d'erreur
         return false;
     }
 
+    bool verifierProduits(std::string n){
+        for(Produit p : lesProduits){
+            if(p.nom() == n){
+                //afficher un message pour le nom
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 };
