@@ -41,7 +41,7 @@ public:
     /// @see     Nom, Quantite, Prix.
     Produit(std::string nom,int quantite, float prix) : Nom(nom), Quantite(quantite), Prix(prix) {}
 
-public:
+
     ///@brief Le destructeur ne fait rien.
   virtual ~Produit() {}
 
@@ -72,7 +72,7 @@ public:
 
 
 
-
+// === Classe : Gestionnaire de Production =====================
 
 
 class GestionnaireProduction
@@ -83,18 +83,62 @@ class GestionnaireProduction
 public :
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
+  virtual ~GestionnaireProduction() {}
+
+
+  /// @brief   Cette méthode donne le nombre de produit enregistré.
   ///
-  /// Ce constructeur est protégé pour que la classe Coordonnees
-  /// reste abstraite
+  /// @return  le nombre de produit enregistré.
   ///
-  /// @param ml le mail de la personne,
-  /// @param ad l'adresse de la personne
-  /// @param cd le code postal de la personne
-  /// @param vl la ville de la personne
-  /// @param nt le numéro de téléphone de la personne
+  /// @see     lesProduits.
+  int nbProduit(){
+      return lesProduits.size();
+  }
+
+  /// @brief   Cette méthode donne tous les produits enregistrés.
   ///
-  /// @see     Mail, Adresse, CodePostal, Ville, NumTelephone.
-  GestionnaireProduction();
+  /// @return  tous les produits enregistrés
+  ///
+  /// @see     lesProduits.
+  std::vector<Produit> tousLesProduits(){
+      return lesProduits;
+  }
+
+  /// @brief   Cette méthode permet de savoir si le produit existe ou non.
+  ///
+  /// @return  true si le produit existe
+  ///
+  /// @see     lesProduits.
+  bool produitExiste(std::string nom){
+      for(int i = 0; i< nbProduit(); i++){
+         if(lesProduits[i].nom() == nom)
+             return true;
+      }
+      return false;
+  }
+
+  /// @brief   Cette méthode donne l'identifiant d'un produit s'il existe.
+  ///
+  /// @return  l'indentifiant d'un produit donné
+  ///
+  /// @see     lesProduits.
+  int produitNom(std::string nom){
+      for(int i = 0; i< nbProduit(); i++){
+         if(lesProduits[i].nom() == nom)
+             return i;
+      }
+      return -1;
+  }
+
+  /// @brief   Cette méthode donne le produit choisi
+  ///
+  /// @return  le produit choisi
+  ///
+  /// @see     lesProduits.
+  Produit produitChoix(int i){
+     return lesProduits[i];
+  }
+
 
 
 

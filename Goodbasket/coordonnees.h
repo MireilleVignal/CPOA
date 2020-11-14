@@ -82,6 +82,7 @@ public:
   ///
   /// @see     NumTelephone.
   virtual unsigned int numtel() const   { return NumTelephone; }
+
   /// @brief   Cette méthode donne le mot de passe de la personne.
   ///
   /// @return  le mot de passe de la personne (dans une chaîne de caractères C++).

@@ -15,10 +15,11 @@ class Personne
     // @brief Le statut de la personne est un caractères C++.
     char Statut;
 
+public:
     //@brief Le gestionnaire de produit.
     GestionnaireProduction GestProduit;
 
-public:
+
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
   ///
@@ -106,6 +107,16 @@ public:
         return "Mais qui êtes-vous ?";
     }
 
+     std::string verifPersonne(){
+        if(Statut == 'P' || Statut == 'p')
+            return "Producteur";
+        else if (Statut == 'C' ||  Statut == 'c')
+            return "Consommateur";
+        else if (Statut == 'R' ||  Statut == 'r')
+            return "Responsable";
+        return "Mais qui êtes-vous ?";
+    }
+
      /// @brief Cette méthode permet au producteur de proposer des
      ///        produits (vérifié si ok en même temps)
      ///
@@ -117,6 +128,10 @@ public:
          if(verifPersonne(Statut) == "Producteur"){
             GestProduit.ajouterProduits(Produit(n,q,p));
          }
+     }
+
+     GestionnaireProduction gestionnaireProd(){
+         return GestProduit;
      }
 
 };
