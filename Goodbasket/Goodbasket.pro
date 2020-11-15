@@ -4,8 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-        pc.cpp
+        main.cpp
 
 HEADERS += \
     GestionnaireConnexion.h \
@@ -14,5 +13,4 @@ HEADERS += \
     GestionnaireProduction.h \
     Personne.h \
     coordonnees.h \
-    pc.h \
     responspc.h

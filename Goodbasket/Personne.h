@@ -4,6 +4,111 @@
 #include "coordonnees.h"
 #include "GestionnaireProduction.h"
 
+
+class Panier{
+    //@brief Le gestionnaire de produit du panier du client
+    GestionnaireProduction panierProduits;
+    //@brief Le prix total du pannier.
+    int prixProduits;
+    //@brief La quantitée totale des produits dans le panier.
+    int quantitePanier;
+
+public:
+
+    /// @brief Le destructeur ne fait rien.
+    virtual ~Panier(){}
+
+    /// @brief   Cette méthode donne la liste de tous les produits du panier.
+    ///
+    /// @return  liste des produits dans le panier.
+    ///
+    /// @see     panierProduits.
+    virtual GestionnaireProduction panierProd() const   { return panierProduits; }
+
+    /// @brief   Cette méthode donne le prix total du panier.
+    ///
+    /// @return  le prix total du panier.
+    ///
+    /// @see     prixProduits.
+    virtual int prixTotal() const   { return prixProduits; }
+
+    /// @brief   Cette méthode donne la quantite totale du panier.
+    ///
+    /// @return  la quantité totale du panier.
+    ///
+    /// @see     quantitePanier.
+    virtual int quantiteTotale() const   { return quantitePanier; }
+
+
+    /// @brief   Cette méthode donne la quantite de produit different
+    ///         dans le panier
+    ///
+    /// @return le nombre de produit different dans le panier(pas par quantité)
+    ///
+    /// @see     quantitéPanier.
+    int nbProdPanier(){
+        return panierProduits.nbProduit();
+    }
+
+    /// @brief   Cette méthode permet d'ajouter un produit au panier
+    ///
+    /// @param p le produit à ajouter.
+    ///
+    /// @see     panierProduits.
+    void ajouterProd(Produit p){
+        int a = 0;
+        Produit prod = p;
+        for(int i = 0; i< nbProdPanier(); i++){
+            if(panierProduits.tousLesProduits()[i].nom() == p.nom()){
+                int q = panierProduits.tousLesProduits()[i].quantite();
+                panierProduits.tousLesProduits()[i].modifQuantite(q);
+                a++;
+                modifPrixT(panierProduits.tousLesProduits()[i].prix() * q);
+            }
+        }
+        if(a == 0){
+            prod.modifQuantite(1);
+            panierProduits.ajouterProduits(prod);
+            modifPrixT(p.prix());
+        }
+
+    }
+
+    /// @brief   Cette méthode permet de modifier le prix total du panier.
+    ///
+    /// @see     prixProduits.
+    void modifPrixT(int p){
+        int prix = prixTotal();
+        prixProduits = prix + p;
+
+    }
+
+    /// @brief   Cette méthode permet de retirer le produit dans sa totalite.
+    ///
+    /// @param p le produit a retirer
+    ///
+    /// @see     quantitéPanier.
+    void retirerToutProduit(Produit p){
+        panierProduits.SupprimerProduit(p);
+    }
+
+    /// @brief   Cette méthode permet de retirer une quantite d'un produit
+    ///
+    /// @param p le produit.
+    ///
+    /// @see     quantitéPanier.
+    void retirerUnProduit(Produit p){
+        if(p.quantite() > 1){
+            int i = panierProd().produitNom(p.nom());
+            panierProduits.produitChoix(i).modifQuantite(p.quantite() - 1);
+        }
+        panierProduits.SupprimerProduit(p);
+    }
+
+};
+
+
+
 class Personne
 {
     // @brief Le nom de la personne est une chaîne de caractères C++.
@@ -18,6 +123,8 @@ class Personne
 public:
     //@brief Le gestionnaire de produit.
     GestionnaireProduction GestProduit;
+    //@brief Le panier de la personne.
+    Panier panier;
 
 
   /// @brief Le constructeur permet de remplir les champs

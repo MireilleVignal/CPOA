@@ -1,7 +1,7 @@
 #ifndef RESPONSPC_H
 #define RESPONSPC_H
 
-#include "Personne.h"
+#include "GestionnaireConnexion.h"
 
 class ResponsPC
 {
@@ -18,12 +18,11 @@ public:
     GestionnaireProduction GestProduit;
 
     //@brief Les producteurs et les consommateurs
-    std::vector<Personne> lesUtilisateurs;
+    GestionnaireConnexion lesUtilisateurs;
 
     //@brief La vente ouverte ou fermé
     bool vente;
 
-public:
   /// @brief Le constructeur permet de remplir les champs
   ///        de la classe en fonction des paramètres passés.
   ///
@@ -31,10 +30,10 @@ public:
   /// @param  mdp  le mot de passe du responsable.
   ///
   /// @see     Mail, MotDePasse.
-  ResponsPC(std::string m, std::string mdp) : Mail(m), MotDePasse(mdp) { vente = false;}
+  ResponsPC(std::string m, std::string mdp, GestionnaireConnexion g) : Mail(m), MotDePasse(mdp), lesUtilisateurs(g) { vente = false;}
 
   /// @brief Le destructeur ne fait rien.
-  virtual ~ResponsPC(){}
+  //virtual ~ResponsPC(){}
 
 
 
@@ -95,7 +94,7 @@ public:
      /// @return  les utilisateurs.
      ///
      /// @see     lesUtilisateurs.
-     std::vector<Personne> utilisateurs(){
+     GestionnaireConnexion utilisateurs(){
          return lesUtilisateurs;
      }
 
@@ -106,7 +105,7 @@ public:
      ///
      /// @see     lesUtilisateurs.
      int nbUtilisateur(){
-         return lesUtilisateurs.size();
+         return lesUtilisateurs.nbPers();
      }
 
      /// @brief   Cette méthode permet de savoir si l'utilisateur existe ou non.
@@ -118,7 +117,7 @@ public:
      /// @see     lesUtilisateurs.
      bool utilisateurExiste(Personne p){
          for(int i = 0; i< nbUtilisateur(); i++){
-            if(lesUtilisateurs[i].coordon().mail() == p.coordon().mail())
+            if(lesUtilisateurs.toutesLesPersonnes()[i].coordon().mail() == p.coordon().mail())
                 return true;
          }
          return false;
@@ -132,11 +131,7 @@ public:
      ///
      /// @see     lesUtilisateurs.
      int utilisateurNom(std::string nom){
-         for(int i = 0; i< nbUtilisateur(); i++){
-            if(lesUtilisateurs[i].nom() == nom)
-                return i;
-         }
-         return -1;
+         return lesUtilisateurs.PersonneNom(nom);
      }
 
      /// @brief   Cette méthode donne l'utilisateur choisi
@@ -147,7 +142,7 @@ public:
      ///
      /// @see     lesutilisateur.
      Personne utilisateurChoix(int i){
-        return lesUtilisateurs[i];
+        return lesUtilisateurs.toutesLesPersonnes()[i];
      }
 
      //-------------------------------------------------------------------------------------------------------------------------------
@@ -170,9 +165,10 @@ public:
      /// @see  GestProduit, lesUtilisateurs.
      void ajoutProd () {
          for(int i = 0; i < nbUtilisateur(); i++){
-             if (lesUtilisateurs[i].verifPersonne() == "Producteur"){
-                 for(int j = 0; j <lesUtilisateurs[i].gestionnaireProd().nbProduit(); j++)
-                 GestProduit.ajouterProduits(lesUtilisateurs[i].gestionnaireProd().produitChoix(j));
+             if (lesUtilisateurs.toutesLesPersonnes()[i].verifPersonne() == "Producteur"){
+                for(int j = 0; j < lesUtilisateurs.toutesLesPersonnes()[i].gestionnaireProd().nbProduit(); j++){
+                    GestProduit.ajouterProduits(lesUtilisateurs.toutesLesPersonnes()[i].gestionnaireProd().produitChoix(j));
+                 }
              }
          }
      }

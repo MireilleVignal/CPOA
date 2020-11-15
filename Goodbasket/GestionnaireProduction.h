@@ -66,6 +66,34 @@ public:
     ///
     /// @see     Prix.
     virtual float      prix() const   { return Prix; }
+
+
+    /// @brief Cette méthode permet de modifier le nom du produit.
+    ///
+    /// @param n le nouveau nom
+    ///
+    /// @see   Nom.
+    void modifNom(std::string n){
+        Nom = n;
+    }
+
+    /// @brief Cette méthode permet de modifier la quantite du produit.
+    ///
+    /// @param q la nouvelle quantité
+    ///
+    /// @see   Quantite.
+    void modifQuantite(int q){
+        Quantite = q;
+    }
+
+    /// @brief Cette méthode permet de modifier le prix du produit.
+    ///
+    /// @param p le nouveau prix
+    ///
+    /// @see   Prix.
+    void modifPrix(float p){
+        Prix = p;
+    }
 };
 
 
@@ -153,24 +181,43 @@ public :
 
     /// @brief Cette méthode permet de verifier que la quantite et les prix sont valides
     ///
+    ///@param quantite la quantite a vérifier
+    /// @param prix le prix à vérifier
+    ///
     /// @return vrai si la quantite et les prix sont coohérents
     ///
     /// @see   Quantite, Prix.
     bool verifierQP(int quantite, float prix){
         if(quantite > 0 && prix > 0)
             return true;
-        //afficher un message d'erreur
         return false;
     }
 
+    /// @brief Cette méthode permet de verifier que le nom du produit
+    ///         n'exciste pas déjà.
+    ///
+    /// @param n le nom a verifier
+    ///
+    /// @return vrai si le nom n'existe pas
+    ///
+    /// @see   lesProduits.
     bool verifierProduits(std::string n){
         for(Produit p : lesProduits){
             if(p.nom() == n){
-                //afficher un message pour le nom
                 return false;
             }
         }
         return true;
+    }
+
+    /// @brief Cette méthode permet de suprimer un produit de la liste
+    ///
+    /// @param p le produit à supprimer
+    ///
+    /// @see   lesProduits.
+    virtual void SupprimerProduit(Produit p) {
+        if(produitNom(p.nom()) != -1)
+            lesProduits.erase(lesProduits.begin() + produitNom(p.nom()));
     }
 
 

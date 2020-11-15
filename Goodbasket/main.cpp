@@ -1,8 +1,48 @@
 #include <iostream>
 
 #include "Personne.h"
+#include "responspc.h"
+#include "GestionnaireConnexion.h"
 
 using namespace std;
+
+//Tous les cas d'utilisation des clients
+
+
+/// @brief Cette méthode permet de proposer des produits
+Personne proposerDesProduits(Personne p){
+    std::string nom = "";
+    int quantite = 0;
+    float prix = 0;
+    while (nom == "") {
+        cout << "Quel est le nom de votre produit ? ->  " << endl;
+        cin >> nom;
+    }
+    while (quantite <= 0) {
+        cout << "Quel est la quantité de votre produit ? ->  " << endl;
+        cin >> quantite;
+    }
+    while (prix <= 0) {
+        cout << "Quel est le prix de votre produit ? ->  " << endl;
+        cin >> prix;
+    }
+    p.proposerProduit(nom, quantite, prix);
+    cout << "Produit ajouté ! MERCI :) " << endl;
+
+    return p;
+}
+
+/// @brief Cette méthode permet d'ouvrir un vente
+void ouvrirUneVente(ResponsPC r){
+        r.ajoutProd();
+        r.ouvertureVente();
+
+        if(r.vente)
+            cout << "La vente est ouverte ! MERCI :) " << endl;
+        else
+            cout << "Il ne doit pas y avoir de produit enrefistré car la vente est toujours fermé ! " << endl;
+
+}
 
 
 /// @param  argc  nombre de paramètres du programme (non utilisé),
@@ -13,47 +53,27 @@ using namespace std;
 /// @version 1a
 int main()
 {
+
     //le numéro de téléphone ne peut pas commencer par un 0 ATTENTION
     Coordonnees c("patrick.durant@gmail.fr","4 route du sud", 54500, "Vandoeuvre les nancy", 625143625, "codeXY");
     Personne pers("Durant", "Patrick", c,'P');
 
+
+    GestionnaireConnexion utilisateurs;
+
     pers.affiche(std::cout);
 
-    //Prod /Cons /ResponsPc
-    /*char perso;
-    cout << "Etes-vous un producteur, un consommateur ou un Responsable ? (p,c,r)\n ";
-    cin >> perso;
 
-    if(perso == 'p' || perso == 'P'){
-        cout << "Bonjour et bienvenu Monsieur le producteur" << endl;
-    }
-    else if (perso == 'c' || perso == 'C') {
-        cout << "Vous pouvez vous connecter : " << endl;
-    }
-    else if (perso == 'R' || perso == 'R') {
-        cout << "Veuillez saisir les informations suivantes pour vous inscrir" << endl;
-    }
-    else {
-        cout << "Vous avez fait un movais choix" << endl;
-    }*/
+    cout << "Vous pouvez proposer des produits : \n" <<endl;
 
-    //Demander la consultation des produits, la connexion ou l'inscription
-    int choix;
-    cout << "Que voulez vous faire ? 1: Consulter, 2:Connexion, 3: Inscription ";
-    cin >> choix;
+    pers = proposerDesProduits(pers);
 
-    if(choix == 1){
-        cout << "Vous voilà dans la consultation des produits" << endl;
-    }
-    else if (choix == 2) {
-        cout << "Vous pouvez vous connecter : " << endl;
-    }
-    else if (choix == 3) {
-        cout << "Veuillez saisir les informations suivantes pour vous inscrir" << endl;
-    }
-    else {
-        cout << "Vous avez fait un movais choix" << endl;
-    }
+
+    //a la déconnexion :
+    utilisateurs.ajouterPers(pers);
+
+    ResponsPC respons("lolo.marie@gmail.fr", "cocoLasticot", utilisateurs);
+    ouvrirUneVente(respons);
 
 
     //Demander l'inscription ou la connexion
