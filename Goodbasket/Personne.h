@@ -74,6 +74,28 @@ public:
 
     }
 
+    /// @brief Cette méthode permet d'ajouter plusieurs exemplaires d'un produit au panier
+    ///
+    /// @param p le produit à ajouter.
+    /// @param nb le nombre à ajouter
+    ///
+    /// @see panierProduits
+    void ajouterProd(Produit p, int nb){
+        bool find = false;
+        Produit prod = p;
+        for(int i = 0 ; i < nbProdPanier(); i++) {
+            if(panierProduits.tousLesProduits()[i].nom() == p.nom()) {
+                int q = panierProduits.tousLesProduits()[i].quantite();
+                panierProduits.tousLesProduits()[i].modifQuantite(q+nb);
+                modifPrixT(panierProduits.tousLesProduits()[i].prix() * (q+nb));
+                find = true;
+            }
+        }
+        if( !find ) {
+            panierProduits.ajouterProduits(p);
+        }
+    }
+
     /// @brief   Cette méthode permet de modifier le prix total du panier.
     ///
     /// @see     prixProduits.

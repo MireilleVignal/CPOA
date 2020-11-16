@@ -177,6 +177,17 @@ public :
         //mettre un message d'erreur sinon
     }
 
+  /// @brief Cette méthode permet d'ajouter plusieurs exemplaire d'un produit à la liste
+  ///
+  /// @see lesProduits.
+  virtual void ajouterProduits(Produit p, int nb) {
+      if(verifierQP(p.quantite(), p.prix()) && verifierProduits(p.nom())){
+          lesProduits.push_back(p);
+          lesProduits[lesProduits.size()-1].modifQuantite(nb);
+      }
+      //Message d'erreur
+  }
+
     /// @brief Cette méthode permet de verifier que la quantite et les prix sont valides
     ///
     ///@param quantite la quantite a vérifier
@@ -192,7 +203,7 @@ public :
     }
 
     /// @brief Cette méthode permet de verifier que le nom du produit
-    ///         n'exciste pas déjà.
+    ///         n'existe pas déjà.
     ///
     /// @param n le nom a verifier
     ///
