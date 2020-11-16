@@ -70,6 +70,26 @@ void ajouterProduitPanier(Panier pn, Produit pd){
     pn.ajouterProd(pd);
 }
 
+/// @brief Cette méthode permet d'ajouter plusieurs exemplaire d'un produit au panier du client
+///
+/// @param pn le panier du client
+/// @param pd le produit à ajouter au panier
+/// @param nb le nombre d'exemplaire à ajouter
+void ajouterProduitPanier(Panier pn, Produit pd, int nb){
+    pn.ajouterProd(pd, nb);
+}
+
+/// @brief Cette méthode permet au client de passer sa commande
+///
+/// @param p le client qui effectue la commande
+void effectuerUneCommande(Personne p){
+    //afficher le prix total du panier
+    p.panier.panierProduits.affiche();
+    //affiche le nombre d'article et leur prix
+    //demander au client ses coordonnées bancaire pour effectuer le paiement
+    //valider le paiement du panier
+}
+
 
 /// @param  argc  nombre de paramètres du programme (non utilisé),
 /// @param  argv  paramètres du programme (non utilisé).
@@ -112,6 +132,7 @@ int main()
     Personne client("Lameche", "Lola", cd, 'C');
 
     ajouterProduitPanier(client.panier, prod);
+    ajouterProduitPanier(client.panier, prod, 5);
 
     return 0;
 }
