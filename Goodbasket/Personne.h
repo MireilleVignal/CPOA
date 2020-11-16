@@ -143,23 +143,23 @@ public:
 
 
 
-    /// @brief   Cette méthode donne le nom du producteur.
+    /// @brief   Cette méthode donne le nom de la personne.
     ///
-    /// @return  le nom du producteur (dans une chaîne de caractères C++).
+    /// @return  le nom de la personne (dans une chaîne de caractères C++).
     ///
     /// @see     Nom.
     virtual std::string nom() const   { return Nom; }
 
-    /// @brief   Cette méthode donne le prenom du producteur.
+    /// @brief   Cette méthode donne le prenom de la personne.
     ///
-    /// @return  le prenom du producteur (dans une chaîne de caractères C++).
+    /// @return  le prenom de la personne (dans une chaîne de caractères C++).
     ///
     /// @see     Prenom.
     virtual std::string prenom() const   { return Prenom; }
 
-    /// @brief   Cette méthode donne les coordonnes du producteur.
+    /// @brief   Cette méthode donne les coordonnes de la personne.
     ///
-    /// @return  les coordonnes du producteur (dans une chaîne de caractères C++).
+    /// @return  les coordonnes de la personne (dans une chaîne de caractères C++).
     ///
     /// @see     Coord.
     virtual Coordonnees coordon() const   { return Coord; }
@@ -178,7 +178,7 @@ public:
 
     /// @brief Cette méthode retourne la description de la personne
     ///
-    /// @return  la description (nom et prix) de la pizza  (dans une chaîne
+    /// @return  la description (nom, prenom et coordonnees) de la personne  (dans une chaîne
     ///           de caractères C++).
     ///
     /// @see  decrit(std::ostream &) const, std::ostringstream,

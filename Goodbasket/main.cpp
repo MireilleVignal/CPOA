@@ -62,6 +62,14 @@ void consulterLesProduits(GestionnaireProduction gp){
     gp.affiche(std::cout);
 }
 
+/// @brief Cette méthode permet d'ajouter un produit au panier du client
+///
+/// @param pn le panier du client
+/// @param pd le produit à ajouter au panier
+void ajouterProduitPanier(Panier pn, Produit pd){
+    pn.ajouterProd(pd);
+}
+
 
 /// @param  argc  nombre de paramètres du programme (non utilisé),
 /// @param  argv  paramètres du programme (non utilisé).
@@ -98,6 +106,12 @@ int main()
 
 
     //Demander l'inscription ou la connexion
+
+    //Effectuer une commande
+    Coordonnees cd("lola.lameche@gmail.com", "3 avenue de la ville", 54500, "Vandoeuvre-lès-Nancy", 639457020, "code YZ");
+    Personne client("Lameche", "Lola", cd, 'C');
+
+    ajouterProduitPanier(client.panier, prod);
 
     return 0;
 }
