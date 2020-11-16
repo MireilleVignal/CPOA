@@ -10,6 +10,10 @@ using namespace std;
 
 
 /// @brief Cette méthode permet de proposer des produits
+///
+/// @param p la personne proposant des produits
+///
+/// @return la personne (pour garder les changements en mémoire)
 Personne proposerDesProduits(Personne p){
     std::string nom = "";
     int quantite = 0;
@@ -33,7 +37,11 @@ Personne proposerDesProduits(Personne p){
 }
 
 /// @brief Cette méthode permet d'ouvrir un vente
-void ouvrirUneVente(ResponsPC r){
+///
+/// @param r le responsable de l'ouverture de la vente
+///
+/// @return le responsable (pour garder les changements en mémoire)
+ResponsPC ouvrirUneVente(ResponsPC r){
         r.ajoutProd();
         r.ouvertureVente();
 
@@ -42,6 +50,16 @@ void ouvrirUneVente(ResponsPC r){
         else
             cout << "Il ne doit pas y avoir de produit enrefistré car la vente est toujours fermé ! " << endl;
 
+        return r;
+}
+
+/// @brief Cette méthode permet de visualiser tous les produits.
+///
+/// @param gp le gestionnaire de produit
+void consulterLesProduits(GestionnaireProduction gp){
+    cout << "La consultation des produits a commencé" << endl;
+
+    gp.affiche(std::cout);
 }
 
 
@@ -67,13 +85,16 @@ int main()
     cout << "Vous pouvez proposer des produits : \n" <<endl;
 
     pers = proposerDesProduits(pers);
+    pers = proposerDesProduits(pers);
 
 
     //a la déconnexion :
     utilisateurs.ajouterPers(pers);
 
     ResponsPC respons("lolo.marie@gmail.fr", "cocoLasticot", utilisateurs);
-    ouvrirUneVente(respons);
+    respons =  ouvrirUneVente(respons);
+
+    consulterLesProduits(respons.GestProduit);
 
 
     //Demander l'inscription ou la connexion

@@ -168,8 +168,6 @@ public :
   }
 
 
-
-
     /// @brief Cette méthode permet d'ajouter un produit a la liste
     ///
     /// @see   lesProduits.
@@ -219,6 +217,37 @@ public :
         if(produitNom(p.nom()) != -1)
             lesProduits.erase(lesProduits.begin() + produitNom(p.nom()));
     }
+
+
+    //--------------------------------------------AFFICHAGE--------------------------------------------
+
+
+    void   decrit(std::ostream &os)
+      { for(int i = 0; i< nbProduit();i++){
+             os << i + 1 <<".  " << lesProduits[i].nom()<< "\t Quantité : " << lesProduits[i].quantite() << "\t Le Prix : " << lesProduits[i].prix() << "€" <<"\n" ;
+
+        }
+            }
+
+      /// @brief Cette méthode retourne la description de la personne
+      ///
+      /// @return  la description (nom et prix) de la pizza  (dans une chaîne
+      ///           de caractères C++).
+      ///
+      /// @see  decrit(std::ostream &) const, std::ostringstream,
+      ///       std::ostringstream.str().
+      std::string decrit()
+      { std::ostringstream os;  decrit(os);  return os.str(); }
+
+      /// @brief Cette méthode permet d'affiche la description de la personne
+      ///
+      /// @param  os  le flot de sortie dans lequel la description
+      ///             sera affichée.
+      ///
+      /// @see  decrit(std::ostream &) const, std::ostream::operator<<(),
+      ///       std::endl.
+      void  affiche(std::ostream &os)
+      { decrit(os); os << std::endl; }
 
 
 };
